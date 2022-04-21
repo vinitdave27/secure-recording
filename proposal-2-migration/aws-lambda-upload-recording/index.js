@@ -22,7 +22,7 @@ exports.handler = async (event, context, callback) => {
 				error: `${lambdaName} : ***ERROR*** : Could not locate the recording for the RecordingSid: ${RecordingSid} and RecordingUrl: ${RecordingUrl}`,
 			});
 		}
-		console.log(`${lambdaName}: status: ${status}`);
+
 		if (!data) {
 			console.log(
 				`${lambdaName} : ***ERROR*** : No data stream for RecordingSid: ${RecordingSid} and RecordingUrl: ${RecordingUrl}`

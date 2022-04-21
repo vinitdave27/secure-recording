@@ -55,7 +55,7 @@ exports.handler = async (event, context, callback) => {
 		console.log(`${lambdaName} : `, signedCloudFrontUrl);
 
 		console.timeEnd(lambdaName);
-		callback(null, formatResponse({ signedCloudFrontUrl }));
+		callback(null, formatResponse({ media_url: signedCloudFrontUrl }));
 	} catch (e) {
 		console.error(`${lambdaName} : ***Error*** : `, e);
 		console.timeEnd(lambdaName);
@@ -65,11 +65,13 @@ exports.handler = async (event, context, callback) => {
 
 var formatResponse = function (body) {
 	var response = {
-		statusCode: 301,
+		statusCode: 200,
 		headers: {
-			Location: body.signedCloudFrontUrl,
+			'Access-Control-Allow-Headers': 'Content-Type',
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'OPTIONS,GET',
 		},
-		body: '',
+		body: JSON.stringify(body),
 	};
 	return response;
 };
